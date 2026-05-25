@@ -673,7 +673,9 @@ footer {
   .textiles-header p { text-align: left; max-width: 100%; }
   .casquettes-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
   .casquettes-header p { text-align: left; max-width: 100%; }
-  .casquettes-grid { grid-template-columns: 1fr; }
+  .casquettes-grid { grid-template-columns: 1fr; height: auto; grid-template-rows: auto; }
+  .casquette-item:first-child { grid-row: auto; }
+  .casquette-item { min-height: clamp(280px, 80vw, 420px); }
   .univers-row-a, .univers-row-b, .univers-row-c, .univers-row-d { grid-template-columns: 1fr 1fr; height: auto; }
   .univers-cell { height: 50vw; }
   .chrome-caption { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
@@ -837,7 +839,7 @@ footer {
   <div class="textiles-grid">
     <div class="textile-item reveal">
       <div class="textile-item-inner">
-        <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723855/Oversize_Jersey_Polo_T-Shirt_2_reffkm.png" alt="Oversize Polo" loading="lazy" data-lightbox>
+        <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723855/Oversize_Jersey_Polo_T-Shirt_2_reffkm.png" alt="Oversize Polo" loading="eager" fetchpriority="high" data-lightbox>
         <div class="textile-info">
           <span class="textile-name">Oversize Polo</span>
           <span class="textile-ref">SNC-001 — Jersey</span>
@@ -846,7 +848,7 @@ footer {
     </div>
     <div class="textile-item reveal reveal-delay-1">
       <div class="textile-item-inner">
-        <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723857/Oversize_Jersey_Polo_T-Shirt_1_kfewvp.png" alt="Oversize Polo Alt" loading="lazy" data-lightbox>
+        <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723857/Oversize_Jersey_Polo_T-Shirt_1_kfewvp.png" alt="Oversize Polo Alt" loading="eager" fetchpriority="high" data-lightbox>
         <div class="textile-info">
           <span class="textile-name">Oversize Polo</span>
           <span class="textile-ref">SNC-001 — Coloris Alt.</span>
