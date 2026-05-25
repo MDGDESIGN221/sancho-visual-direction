@@ -579,6 +579,77 @@ footer {
 }
 
 /* =========================================================
+   CASQUETTES
+   ========================================================= */
+#casquettes { padding: 11vw 8vw; background: var(--black); }
+.casquettes-header {
+  max-width: 1400px; margin: 0 auto 6rem;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 4rem;
+}
+.casquettes-header h2 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(2.5rem, 5.5vw, 4.8rem);
+  line-height: 1.05; letter-spacing: 0.03em;
+}
+.casquettes-header h2 em { font-style: italic; font-family: var(--font-serif); font-weight: 300; color: rgba(242,242,242,0.35); }
+.casquettes-header p {
+  font-family: var(--font-ui); font-weight: 300; font-size: 0.85rem;
+  line-height: 1.9; color: rgba(242,242,242,0.4);
+  max-width: 360px; text-align: right;
+}
+.casquettes-grid {
+  max-width: 1400px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+}
+.casquette-item {
+  position: relative; background: var(--dark-gray);
+}
+.casquette-item-inner { overflow: hidden; position: relative; }
+.casquette-item img {
+  width: 100%; display: block;
+  object-fit: contain;
+  height: clamp(340px, 40vw, 580px);
+  padding: 2.5rem;
+  background: var(--dark-gray);
+  transition: transform 0.8s cubic-bezier(0.16,1,0.3,1), filter 0.5s;
+  filter: grayscale(10%) brightness(0.95);
+}
+.casquette-item:hover img {
+  transform: scale(1.035);
+  filter: grayscale(0%) brightness(1.02);
+}
+.casquette-item-inner::after {
+  content: '↗ AGRANDIR';
+  position: absolute; top: 1.2rem; right: 1.4rem;
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.5rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(242,242,242,0.28);
+  background: rgba(10,10,10,0.6);
+  padding: 0.35rem 0.7rem;
+  backdrop-filter: blur(4px);
+  opacity: 0; transition: opacity 0.3s;
+  pointer-events: none; z-index: 3;
+}
+.casquette-item:hover .casquette-item-inner::after { opacity: 1; }
+.casquette-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2rem 1.8rem 1.6rem;
+  background: linear-gradient(to top, rgba(10,10,10,0.94) 55%, transparent);
+  transform: translateY(100%);
+  transition: transform 0.42s cubic-bezier(0.16,1,0.3,1);
+  isolation: isolate; z-index: 2;
+}
+.casquette-item:hover .casquette-info { transform: translateY(0); }
+.casquette-name {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: 1.15rem; letter-spacing: 0.06em; display: block; margin-bottom: 0.3rem;
+}
+.casquette-ref {
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.58rem;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted);
+}
+
+/* =========================================================
    RESPONSIVE
    ========================================================= */
 @media (max-width: 900px) {
@@ -592,6 +663,9 @@ footer {
   .explorations-grid { grid-template-columns: repeat(3,1fr); }
   .textiles-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
   .textiles-header p { text-align: left; max-width: 100%; }
+  .casquettes-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .casquettes-header p { text-align: left; max-width: 100%; }
+  .casquettes-grid { grid-template-columns: 1fr; }
   .univers-row-a, .univers-row-b, .univers-row-c, .univers-row-d { grid-template-columns: 1fr 1fr; height: auto; }
   .univers-cell { height: 50vw; }
   .chrome-caption { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
@@ -640,6 +714,7 @@ footer {
     <li><a href="#construction">Construction</a></li>
     <li><a href="#explorations">Explorations</a></li>
     <li><a href="#textiles">Collection</a></li>
+    <li><a href="#casquettes">Casquettes</a></li>
     <li><a href="#final">Direction</a></li>
   </ul>
 </nav>
@@ -793,9 +868,51 @@ footer {
 
 <div class="hr-line"></div>
 
+<!-- CASQUETTES -->
+<section id="casquettes">
+  <div class="casquettes-header">
+    <div>
+      <span class="section-label reveal"><span class="section-number">06 —</span>Accessoires</span>
+      <h2 class="reveal reveal-delay-1">Casquettes<br><em>Signature</em></h2>
+    </div>
+    <p class="reveal reveal-delay-2">Application du logotype SANCHO sur la première série de casquettes de la collection. Chaque pièce prolonge la direction graphique de la marque sur un accessoire iconique.</p>
+  </div>
+  <div class="casquettes-grid">
+    <div class="casquette-item reveal">
+      <div class="casquette-item-inner">
+        <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779748223/b08a05cb-34b0-4789-bbf8-f7f1440228a8_wzzvwo.png" alt="Casquette SANCHO" loading="lazy" data-lightbox>
+        <div class="casquette-info">
+          <span class="casquette-name">Cap Signature</span>
+          <span class="casquette-ref">SNC-003 — Vue Avant</span>
+        </div>
+      </div>
+    </div>
+    <div class="casquette-item reveal reveal-delay-1">
+      <div class="casquette-item-inner">
+        <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779748111/ChatGPT_Image_25_mai_2026_22_27_20_bypw38.png" alt="Casquette SANCHO" loading="lazy" data-lightbox>
+        <div class="casquette-info">
+          <span class="casquette-name">Cap Signature</span>
+          <span class="casquette-ref">SNC-003 — Coloris Alt.</span>
+        </div>
+      </div>
+    </div>
+    <div class="casquette-item reveal reveal-delay-2">
+      <div class="casquette-item-inner">
+        <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779748134/ChatGPT_Image_25_mai_2026_22_28_28_jjr4k7.png" alt="Casquette SANCHO" loading="lazy" data-lightbox>
+        <div class="casquette-info">
+          <span class="casquette-name">Cap Signature</span>
+          <span class="casquette-ref">SNC-003 — Vue Profil</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr-line"></div>
+
 <!-- UNIVERS VISUEL — nouvelle mosaïque asymétrique -->
 <section id="univers">
-  <span class="section-label reveal" style="display:block;padding:4vw 8vw 0;"><span class="section-number">06 —</span>Univers Visuel</span>
+  <span class="section-label reveal" style="display:block;padding:4vw 8vw 0;"><span class="section-number">07 —</span>Univers Visuel</span>
 
   <!-- Rangée A : 3 colonnes inégales -->
   <div class="univers-row-a">
@@ -828,6 +945,13 @@ footer {
   <div class="univers-row-d">
     <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723338/Calque_1_gb0em3.jpg" alt="" loading="lazy" data-lightbox></div>
     <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723147/ChatGPT_Image_24_mai_2026_23_50_22_pve9b9.png" alt="" loading="lazy" data-lightbox></div>
+  </div>
+
+  <!-- Rangée E : 3 nouvelles images -->
+  <div class="univers-row-c">
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779748988/ebd89dee-b4c8-4fc8-9f6b-9f50756f9d79_uvgxwe.png" alt="" loading="lazy" data-lightbox></div>
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779748987/ChatGPT_Image_25_mai_2026_22_42_21_egtp4k.png" alt="" loading="lazy" data-lightbox></div>
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779747764/ChatGPT_Image_25_mai_2026_22_22_08_sdkpla.png" alt="" loading="lazy" data-lightbox></div>
   </div>
 
   <!-- Plein écran final -->
