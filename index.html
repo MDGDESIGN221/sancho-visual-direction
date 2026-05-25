@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SANCHO — Visual Direction</title>
+<meta name="description" content="SANCHO — Collection Originale. Direction artistique streetwear haut de gamme. Est. 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Barlow+Condensed:wght@300;400;500;600&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<!-- Clash Display via CDN -->
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=cabinet-grotesk@300,400,500&display=swap">
+<style>
+:root {
+  --black: #0A0A0A;
+  --white: #F2F2F2;
+  --chrome: #C0C0C0;
+  --dark-gray: #111111;
+  --mid-gray: #181818;
+  --text-muted: #666;
+  /* Nouvelles polices avec fallbacks */
+  --font-display: 'Clash Display', 'Barlow Condensed', sans-serif;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-ui: 'Cabinet Grotesk', 'Barlow', sans-serif;
+  --font-condensed: 'Barlow Condensed', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--black); }
+body {
+  background: var(--black); color: var(--white);
+  font-family: var(--font-ui); font-weight: 300;
+  overflow-x: hidden; cursor: none;
+}
+
+/* GRAIN */
+body::after {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9000; opacity: 0.7;
+}
+
+/* CURSOR */
+.cursor {
+  position: fixed; width: 7px; height: 7px;
+  background: var(--white); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%); mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed; width: 34px; height: 34px;
+  border: 1px solid rgba(242,242,242,0.35); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.18s ease, border-color 0.2s;
+  mix-blend-mode: difference;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.8rem 3.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  mix-blend-mode: difference;
+}
+.nav-logo {
+  font-family: var(--font-display); font-weight: 600; font-size: 1rem;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--white); text-decoration: none;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.7rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--white); text-decoration: none;
+  opacity: 0.45; transition: opacity 0.3s;
+}
+.nav-links a:hover { opacity: 1; }
+
+/* REVEAL */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.26s; }
+.reveal-delay-3 { transition-delay: 0.42s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
+
+.section-label {
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.62rem;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--text-muted); display: block; margin-bottom: 2.5rem;
+}
+.section-number { opacity: 0.35; margin-right: 1rem; }
+.hr-line {
+  width: 100%; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(242,242,242,0.07), transparent);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+#hero {
+  position: relative; height: 100dvh; min-height: 700px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; background: var(--black);
+}
+.hero-bg-text {
+  position: absolute;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(100px, 20vw, 300px);
+  color: rgba(242,242,242,0.016);
+  letter-spacing: 0.15em; text-transform: uppercase;
+  white-space: nowrap; user-select: none; pointer-events: none;
+  animation: drift 22s ease-in-out infinite alternate;
+}
+@keyframes drift { from { transform: translateX(-2%); } to { transform: translateX(2%); } }
+.hero-content {
+  position: relative; z-index: 2; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+}
+.hero-logo {
+  width: clamp(180px, 42vw, 480px); opacity: 0;
+  animation: heroFade 1.8s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
+}
+@keyframes heroFade {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow {
+  font-family: var(--font-ui); font-weight: 400;
+  font-size: clamp(0.6rem, 1.1vw, 0.72rem);
+  letter-spacing: 0.4em; text-transform: uppercase; color: var(--chrome);
+  opacity: 0; animation: heroFade 1.2s ease 1s forwards;
+}
+.hero-title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(3.5rem, 9vw, 8.5rem);
+  letter-spacing: 0.25em; line-height: 0.95;
+  opacity: 0; animation: heroFade 1.2s ease 0.7s forwards;
+}
+.hero-tagline {
+  font-family: var(--font-serif); font-style: italic; font-weight: 300;
+  font-size: clamp(0.95rem, 1.8vw, 1.25rem); color: var(--text-muted);
+  opacity: 0; animation: heroFade 1.2s ease 1.3s forwards;
+}
+
+/* =========================================================
+   LOGOTYPE
+   ========================================================= */
+#logotype { padding: 11vw 8vw; background: var(--black); }
+.logotype-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 7rem; align-items: center;
+  max-width: 1400px; margin: 0 auto;
+}
+.logotype-text h2 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  line-height: 1.05; letter-spacing: 0.03em; margin-bottom: 3rem;
+}
+.logotype-text h2 em { font-style: italic; font-family: var(--font-serif); font-weight: 300; color: rgba(242,242,242,0.38); }
+.logotype-text p {
+  font-family: var(--font-ui); font-weight: 300;
+  font-size: clamp(0.82rem, 1.1vw, 0.95rem);
+  line-height: 1.9; color: rgba(242,242,242,0.48);
+  margin-bottom: 1.4rem;
+}
+.logotype-visual {
+  display: flex; align-items: center; justify-content: center;
+  padding: 4rem; background: var(--dark-gray);
+}
+.logotype-img-big { width: 100%; max-width: 460px; display: block; }
+
+/* =========================================================
+   CONSTRUCTION
+   ========================================================= */
+#construction { padding: 11vw 8vw; background: var(--dark-gray); }
+.construction-header {
+  max-width: 1400px; margin: 0 auto 7rem;
+  display: grid; grid-template-columns: 1fr 2fr;
+  gap: 4rem; align-items: start;
+}
+.construction-header h2 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(2.2rem, 4.5vw, 4rem);
+  line-height: 1.1; letter-spacing: 0.03em;
+}
+.construction-header p {
+  font-family: var(--font-ui); font-weight: 300;
+  font-size: 0.9rem; line-height: 1.9; color: rgba(242,242,242,0.45);
+}
+.construction-grid {
+  max-width: 1400px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 2px;
+}
+.construction-item {
+  background: var(--black); padding: 4rem 3rem;
+  display: flex; flex-direction: column; gap: 2rem;
+  overflow: hidden; transition: background 0.4s;
+}
+.construction-item:hover { background: #0f0f0f; }
+.construction-item img {
+  width: 100%; opacity: 0.75;
+  transition: opacity 0.4s, transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  filter: invert(1) brightness(0.8);
+}
+.construction-item:hover img { opacity: 1; transform: scale(1.02); }
+.construction-item-label {
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.6rem;
+  letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted);
+}
+.construction-item-title {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: 1.4rem; letter-spacing: 0.08em;
+}
+
+/* =========================================================
+   EXPLORATIONS — grille statique, logos blancs sur noir
+   ========================================================= */
+#explorations { padding: 11vw 8vw; background: var(--black); }
+.explorations-header {
+  max-width: 1400px; margin: 0 auto 5rem;
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 6rem; align-items: end;
+}
+.explorations-header h2 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(2.5rem, 5.5vw, 4.8rem);
+  line-height: 1.05; letter-spacing: 0.03em;
+}
+.explorations-header h2 em { font-style: italic; font-family: var(--font-serif); font-weight: 300; color: rgba(242,242,242,0.38); }
+.explorations-header p {
+  font-family: var(--font-ui); font-weight: 300; font-size: 0.85rem;
+  line-height: 1.9; color: rgba(242,242,242,0.4); max-width: 480px;
+}
+
+/* Grille 5 colonnes × 2 rangées */
+.explorations-grid {
+  max-width: 1400px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+}
+.exploration-card {
+  background: #0d0d0d;
+  border: 1px solid rgba(242,242,242,0.06);
+  aspect-ratio: 3/4;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 2.5rem 2rem;
+  position: relative; overflow: hidden;
+  transition: border-color 0.4s, background 0.4s;
+}
+.exploration-card:hover {
+  border-color: rgba(242,242,242,0.18);
+  background: #121212;
+}
+.exploration-card img {
+  width: 75%; display: block;
+  filter: brightness(0) invert(1); /* force blanc */
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.4s;
+  opacity: 0.85;
+}
+.exploration-card:hover img { transform: scale(1.06); opacity: 1; }
+.version-tag {
+  position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.52rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(242,242,242,0.3); white-space: nowrap;
+  transition: color 0.3s;
+}
+.exploration-card:hover .version-tag { color: rgba(242,242,242,0.6); }
+
+/* =========================================================
+   CHROME — image plein cadre, centrée proprement
+   ========================================================= */
+#chrome {
+  position: relative; height: 85vh; min-height: 580px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; background: #050505;
+}
+.chrome-bg-ambient {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, #1a1a1a 0%, #050505 100%);
+}
+.chrome-float {
+  position: relative; z-index: 2;
+  width: clamp(320px, 55vw, 780px);
+  display: flex; align-items: center; justify-content: center;
+}
+.chrome-float img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 0 60px rgba(200,200,200,0.15)) drop-shadow(0 4px 20px rgba(0,0,0,0.9));
+  animation: float 5s ease-in-out infinite;
+}
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-14px); }
+  100% { transform: translateY(0px); }
+}
+.chrome-caption {
+  position: absolute; bottom: 3rem; left: 0; right: 0;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 0 5vw; z-index: 3; pointer-events: none;
+}
+.chrome-caption-label {
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.6rem;
+  letter-spacing: 0.35em; text-transform: uppercase; color: rgba(242,242,242,0.35);
+}
+.chrome-caption-title {
+  font-family: var(--font-serif); font-style: italic; font-weight: 300;
+  font-size: clamp(1.2rem, 2.5vw, 2.2rem); color: rgba(200,200,200,0.7);
+  letter-spacing: 0.04em;
+}
+.chrome-caption-right {
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.58rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(242,242,242,0.25); text-align: right; line-height: 1.8;
+}
+
+/* =========================================================
+   TEXTILES
+   ========================================================= */
+#textiles { padding: 11vw 8vw; background: var(--dark-gray); }
+.textiles-header {
+  max-width: 1400px; margin: 0 auto 6rem;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 4rem;
+}
+.textiles-header h2 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(2.5rem, 5.5vw, 4.8rem);
+  line-height: 1.05; letter-spacing: 0.03em;
+}
+.textiles-header h2 em { font-style: italic; font-family: var(--font-serif); font-weight: 300; color: rgba(242,242,242,0.35); }
+.textiles-header p {
+  font-family: var(--font-ui); font-weight: 300; font-size: 0.85rem;
+  line-height: 1.9; color: rgba(242,242,242,0.4);
+  max-width: 360px; text-align: right;
+}
+.textiles-grid {
+  max-width: 1400px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(2,1fr);
+  grid-template-rows: auto auto; gap: 2px;
+}
+.textile-item {
+  position: relative; background: var(--black);
+}
+.textile-item-inner {
+  overflow: hidden; position: relative;
+}
+.textile-item img {
+  width: 100%; display: block;
+  object-fit: contain;
+  height: clamp(380px, 45vw, 620px);
+  padding: 2.5rem;
+  background: var(--black);
+  transition: transform 0.8s cubic-bezier(0.16,1,0.3,1), filter 0.5s;
+  filter: grayscale(10%) brightness(0.95);
+}
+.textile-item:hover img {
+  transform: scale(1.035);
+  filter: grayscale(0%) brightness(1.02);
+}
+/* Hint cliquable permanent en haut à droite */
+.textile-item-inner::after {
+  content: '↗ AGRANDIR';
+  position: absolute; top: 1.2rem; right: 1.4rem;
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.5rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(242,242,242,0.28);
+  background: rgba(10,10,10,0.6);
+  padding: 0.35rem 0.7rem;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none; z-index: 3;
+}
+.textile-item:hover .textile-item-inner::after { opacity: 1; }
+.textile-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2rem 1.8rem 1.6rem;
+  background: linear-gradient(to top, rgba(10,10,10,0.94) 55%, transparent);
+  transform: translateY(100%);
+  transition: transform 0.42s cubic-bezier(0.16,1,0.3,1);
+  isolation: isolate; z-index: 2;
+}
+.textile-item:hover .textile-info { transform: translateY(0); }
+.textile-name {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: 1.15rem; letter-spacing: 0.06em; display: block; margin-bottom: 0.3rem;
+}
+.textile-ref {
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.58rem;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted);
+}
+
+/* =========================================================
+   LIGHTBOX
+   ========================================================= */
+.lightbox {
+  position: fixed; inset: 0; z-index: 8000;
+  background: rgba(10,10,10,0.97);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.lightbox.open { opacity: 1; pointer-events: all; }
+.lightbox-img {
+  max-width: 90vw; max-height: 88vh;
+  object-fit: contain;
+  transform: scale(0.95);
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.lightbox.open .lightbox-img { transform: scale(1); }
+.lightbox-close {
+  position: absolute; top: 2rem; right: 2.5rem;
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.6rem;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted);
+  cursor: pointer; background: none; border: none;
+  transition: color 0.3s;
+}
+.lightbox-close:hover { color: var(--white); }
+.lightbox-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.58rem;
+  letter-spacing: 0.2em; text-transform: uppercase; color: rgba(242,242,242,0.3);
+  cursor: pointer; background: none; border: none; padding: 1rem;
+  transition: color 0.3s;
+}
+.lightbox-nav:hover { color: var(--white); }
+.lightbox-nav.prev { left: 2rem; }
+.lightbox-nav.next { right: 2rem; }
+.lightbox-counter {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.55rem;
+  letter-spacing: 0.3em; color: var(--text-muted);
+}
+
+/* curseur pointer sur images cliquables */
+.textile-item, .univers-cell { cursor: none; }
+
+/* =========================================================
+   UNIVERS VISUEL — nouvelle disposition mosaïque + hints
+   ========================================================= */
+#univers { background: var(--black); }
+
+/* Hint "cliquer" sur toutes les cellules */
+.univers-cell {
+  overflow: hidden; position: relative;
+}
+.univers-cell::after {
+  content: '↗';
+  position: absolute; top: 1rem; right: 1rem;
+  font-size: 0.9rem;
+  color: rgba(242,242,242,0.5);
+  background: rgba(10,10,10,0.55);
+  backdrop-filter: blur(6px);
+  width: 2rem; height: 2rem;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none; z-index: 3;
+}
+.univers-cell:hover::after { opacity: 1; }
+
+.univers-cell img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.5s;
+  filter: grayscale(20%) brightness(0.88);
+}
+.univers-cell:hover img {
+  transform: scale(1.04);
+  filter: grayscale(0%) brightness(1);
+}
+.univers-cell.hero-shot img {
+  object-position: center 30%;
+  filter: grayscale(0%) brightness(0.92);
+}
+
+/* Rangée 1 : 3 colonnes inégales */
+.univers-row-a {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.8fr;
+  height: 58vh;
+}
+/* Rangée 2 : 2 colonnes */
+.univers-row-b {
+  display: grid;
+  grid-template-columns: 1.5fr 2.5fr;
+  height: 52vh;
+}
+/* Citation pleine largeur */
+.univers-interlude {
+  background: var(--mid-gray); padding: 9vw 8vw;
+  display: flex; align-items: center; justify-content: center;
+}
+.univers-interlude-inner { max-width: 860px; text-align: center; }
+.univers-interlude blockquote {
+  font-family: var(--font-serif); font-style: italic; font-weight: 300;
+  font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+  line-height: 1.35; color: rgba(242,242,242,0.62);
+}
+.univers-interlude blockquote em {
+  font-style: normal; font-weight: 600;
+  font-family: var(--font-display);
+  color: var(--white); letter-spacing: 0.05em;
+}
+/* Rangée 3 : 3 colonnes */
+.univers-row-c {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 55vh;
+}
+/* Rangée 4 : 2 colonnes + 1 grande */
+.univers-row-d {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 52vh;
+}
+/* Plein écran final */
+.univers-row-e {
+  height: 75vh;
+}
+.univers-row-e .univers-cell { height: 100%; }
+
+/* =========================================================
+   FINAL
+   ========================================================= */
+#final {
+  height: 100dvh; min-height: 700px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: var(--black); position: relative; overflow: hidden;
+}
+.final-bg {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.final-bg-word {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(140px, 28vw, 420px);
+  color: rgba(242,242,242,0.018);
+  user-select: none; letter-spacing: 0.15em; text-transform: uppercase;
+}
+.final-content {
+  position: relative; z-index: 2; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 1.4rem;
+}
+.final-content img { width: clamp(160px, 32vw, 360px); margin-bottom: 0.8rem; }
+.final-title {
+  font-family: var(--font-display); font-weight: 700;
+  letter-spacing: 0.3em; font-size: clamp(2rem, 5.5vw, 4.5rem);
+}
+.final-sub {
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.65rem;
+  letter-spacing: 0.35em; text-transform: uppercase; color: var(--text-muted);
+}
+
+/* FOOTER */
+footer {
+  background: var(--dark-gray); padding: 2.5rem 8vw;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(242,242,242,0.04);
+}
+.footer-logo {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: 0.85rem; letter-spacing: 0.4em;
+}
+.footer-info {
+  font-family: var(--font-ui); font-weight: 400; font-size: 0.58rem;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 900px) {
+  nav { padding: 1.5rem 2rem; }
+  .nav-links { display: none; }
+  .logotype-inner { grid-template-columns: 1fr; gap: 3.5rem; }
+  .logotype-visual { padding: 3rem; }
+  .construction-header { grid-template-columns: 1fr; gap: 2rem; }
+  .construction-grid { grid-template-columns: 1fr; }
+  .explorations-header { grid-template-columns: 1fr; gap: 2rem; }
+  .explorations-grid { grid-template-columns: repeat(3,1fr); }
+  .textiles-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .textiles-header p { text-align: left; max-width: 100%; }
+  .univers-row-a, .univers-row-b, .univers-row-c, .univers-row-d { grid-template-columns: 1fr 1fr; height: auto; }
+  .univers-cell { height: 50vw; }
+  .chrome-caption { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+  footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+  body { cursor: auto; }
+  .cursor, .cursor-ring { display: none; }
+}
+@media (max-width: 600px) {
+  #logotype, #construction, #explorations, #textiles { padding: 14vw 5vw; }
+  .textiles-grid { grid-template-columns: 1fr; }
+  .textile-item img { height: clamp(300px, 80vw, 480px); }
+  .explorations-grid { grid-template-columns: repeat(2,1fr); }
+  .univers-row-a, .univers-row-b, .univers-row-c, .univers-row-d { grid-template-columns: 1fr; }
+  .univers-cell { height: 70vw; }
+  .univers-row-e { height: 80vw; }
+  .chrome-float { width: 85vw; }
+}
+
+@media (pointer: fine) {
+  body { cursor: none; }
+}
+@media (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor, .cursor-ring { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Aperçu image">
+  <button class="lightbox-close" id="lb-close">Fermer ✕</button>
+  <button class="lightbox-nav prev" id="lb-prev">← Préc.</button>
+  <img class="lightbox-img" id="lb-img" src="" alt="">
+  <button class="lightbox-nav next" id="lb-next">Suiv. →</button>
+  <span class="lightbox-counter" id="lb-counter"></span>
+</div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<nav>
+  <a href="#" class="nav-logo">SANCHO</a>
+  <ul class="nav-links">
+    <li><a href="#logotype">Logotype</a></li>
+    <li><a href="#construction">Construction</a></li>
+    <li><a href="#explorations">Explorations</a></li>
+    <li><a href="#textiles">Collection</a></li>
+    <li><a href="#final">Direction</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">SANCHO</div>
+  <div class="hero-content">
+    <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779722827/logo_sancho_V1_BLANC_zuagej.png" alt="SANCHO" class="hero-logo">
+    <p class="hero-eyebrow">Collection Originale &mdash; Est. 2026</p>
+    <h1 class="hero-title">SANCHO</h1>
+    <p class="hero-tagline">Visual Direction</p>
+  </div>
+</section>
+
+<div class="hr-line"></div>
+
+<!-- LOGOTYPE -->
+<section id="logotype">
+  <div class="logotype-inner">
+    <div class="logotype-text">
+      <span class="section-label reveal"><span class="section-number">01 —</span>Le Logotype</span>
+      <h2 class="reveal reveal-delay-1">Signature<br><em>graphique</em></h2>
+      <p class="reveal reveal-delay-2">Le logotype SANCHO a été entièrement dessiné sur mesure pour la marque. Le dessin repose sur une structure courbe continue qui unifie l'ensemble des lettres et crée une silhouette identifiable immédiatement.</p>
+      <p class="reveal reveal-delay-3">Chaque caractère a été ajusté manuellement afin d'obtenir un équilibre précis entre stabilité, fluidité et impact visuel.</p>
+      <p class="reveal reveal-delay-4">Les épaisseurs, raccords, contreformes et alignements ont fait l'objet de corrections optiques spécifiques pour garantir une cohérence parfaite sur tous les supports. Le résultat est un logotype propriétaire conçu comme une signature graphique complète.</p>
+    </div>
+    <div class="logotype-visual reveal reveal-delay-2">
+      <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779722827/logo_sancho_V1_BLANC_zuagej.png" alt="SANCHO logotype" class="logotype-img-big">
+    </div>
+  </div>
+</section>
+
+<div class="hr-line"></div>
+
+<!-- CONSTRUCTION -->
+<section id="construction">
+  <div class="construction-header">
+    <div>
+      <span class="section-label reveal"><span class="section-number">02 —</span>Construction</span>
+      <h2 class="reveal reveal-delay-1">Système<br>de construction</h2>
+    </div>
+    <p class="reveal reveal-delay-2">Le logotype repose sur une structure de construction permettant d'assurer une cohérence visuelle entre les proportions, les courbes et les alignements. Les principaux axes du dessin ont été harmonisés afin de maintenir une continuité graphique entre les lettres et une silhouette stable à différentes tailles. Cette structure permet d'assurer une reproduction cohérente sur différents supports et procédés d'application.</p>
+  </div>
+  <div class="construction-grid">
+    <div class="construction-item reveal">
+      <span class="construction-item-label">Grille principale</span>
+      <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779724022/Sancho_grid_rrlwnd.png" alt="Grid">
+      <span class="construction-item-title">Grid System</span>
+    </div>
+    <div class="construction-item reveal reveal-delay-1">
+      <span class="construction-item-label">Points d'ancrage</span>
+      <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779724021/Sancho_Anchor_shapes_mzmohi.png" alt="Anchors">
+      <span class="construction-item-title">Anchor Shapes</span>
+    </div>
+    <div class="construction-item reveal reveal-delay-2">
+      <span class="construction-item-label">Tracés & courbes</span>
+      <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779724021/Sancho_Handles_Line_and_Shape_eq2ne9.png" alt="Handles">
+      <span class="construction-item-title">Handles & Paths</span>
+    </div>
+  </div>
+</section>
+
+<div class="hr-line"></div>
+
+<!-- EXPLORATIONS — grille statique, logos blancs sur noir -->
+<section id="explorations">
+  <div class="explorations-header">
+    <div>
+      <span class="section-label reveal"><span class="section-number">03 —</span>Explorations</span>
+      <h2 class="reveal reveal-delay-1">Recherches<br><em>& pistes</em></h2>
+    </div>
+    <p class="reveal reveal-delay-2">Avant la proposition finale, plusieurs pistes graphiques ont été explorées afin de développer l'univers typographique de SANCHO. Ces recherches ont permis d'étudier différentes approches de construction, de rythme, de proportions et de présence visuelle.</p>
+  </div>
+  <div class="explorations-grid reveal">
+    <div class="exploration-card"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779722827/logo_sancho_V1_BLANC_zuagej.png" alt="V1"><span class="version-tag">V1</span></div>
+    <div class="exploration-card"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779722827/SANCHO_V2_Blanc_mlcqh4.png" alt="V2"><span class="version-tag">V2</span></div>
+    <div class="exploration-card"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779722828/SANCHO_V3_BLANC_nmgku4.png" alt="V3"><span class="version-tag">V3</span></div>
+    <div class="exploration-card"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779722827/Sancho_brand_logo_V4_BLANC_gtcnml.png" alt="V4"><span class="version-tag">V4</span></div>
+    <div class="exploration-card"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779722828/SANCHO_V5_BLANC_jb5f3l.png" alt="V5"><span class="version-tag">V5</span></div>
+  </div>
+</section>
+
+<div class="hr-line"></div>
+
+<!-- CHROME — image centrée proprement -->
+<section id="chrome">
+  <div class="chrome-bg-ambient"></div>
+  <div class="chrome-float">
+    <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723954/sancho_en_chrome_x4iba0.png" alt="SANCHO Chrome">
+  </div>
+  <div class="chrome-caption">
+    <div>
+      <div class="chrome-caption-label reveal"><span class="section-number">04 —</span>Finition Chrome</div>
+      <div class="chrome-caption-title reveal reveal-delay-1">Version Métallique</div>
+    </div>
+    <div class="chrome-caption-right reveal reveal-delay-2">Application<br>Chromée<br>— 2026</div>
+  </div>
+</section>
+
+<div class="hr-line"></div>
+
+<!-- TEXTILES -->
+<section id="textiles">
+  <div class="textiles-header">
+    <div>
+      <span class="section-label reveal"><span class="section-number">05 —</span>Applications textiles</span>
+      <h2 class="reveal reveal-delay-1">Collection<br><em>Originale</em></h2>
+    </div>
+    <p class="reveal reveal-delay-2">Application du système graphique SANCHO sur les premières pièces de la collection. Chaque vêtement est pensé comme un support d'expression de la direction artistique.</p>
+  </div>
+  <div class="textiles-grid">
+    <div class="textile-item reveal">
+      <div class="textile-item-inner">
+        <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723855/Oversize_Jersey_Polo_T-Shirt_2_reffkm.png" alt="Oversize Polo" loading="lazy" data-lightbox>
+        <div class="textile-info">
+          <span class="textile-name">Oversize Polo</span>
+          <span class="textile-ref">SNC-001 — Jersey</span>
+        </div>
+      </div>
+    </div>
+    <div class="textile-item reveal reveal-delay-1">
+      <div class="textile-item-inner">
+        <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723857/Oversize_Jersey_Polo_T-Shirt_1_kfewvp.png" alt="Oversize Polo Alt" loading="lazy" data-lightbox>
+        <div class="textile-info">
+          <span class="textile-name">Oversize Polo</span>
+          <span class="textile-ref">SNC-001 — Coloris Alt.</span>
+        </div>
+      </div>
+    </div>
+    <div class="textile-item reveal reveal-delay-2">
+      <div class="textile-item-inner">
+        <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723854/HOODIE_1_kgqupa.png" alt="Hoodie 1" loading="lazy" data-lightbox>
+        <div class="textile-info">
+          <span class="textile-name">Hoodie Signature</span>
+          <span class="textile-ref">SNC-002 — Fleece</span>
+        </div>
+      </div>
+    </div>
+    <div class="textile-item reveal reveal-delay-3">
+      <div class="textile-item-inner">
+        <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723855/HOODIE_2_sqpfp6.png" alt="Hoodie 2" loading="lazy" data-lightbox>
+        <div class="textile-info">
+          <span class="textile-name">Hoodie Signature</span>
+          <span class="textile-ref">SNC-002 — Coloris Alt.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr-line"></div>
+
+<!-- UNIVERS VISUEL — nouvelle mosaïque asymétrique -->
+<section id="univers">
+  <span class="section-label reveal" style="display:block;padding:4vw 8vw 0;"><span class="section-number">06 —</span>Univers Visuel</span>
+
+  <!-- Rangée A : 3 colonnes inégales -->
+  <div class="univers-row-a">
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723147/ChatGPT_Image_24_mai_2026_23_50_22_pve9b9.png" alt="" loading="lazy" data-lightbox></div>
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723147/ChatGPT_Image_24_mai_2026_23_51_31_misycj.png" alt="" loading="lazy" data-lightbox></div>
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723147/ChatGPT_Image_24_mai_2026_23_08_56_wy45jp.png" alt="" loading="lazy" data-lightbox></div>
+  </div>
+
+  <!-- Rangée B : 2 colonnes -->
+  <div class="univers-row-b">
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723147/ChatGPT_Image_24_mai_2026_23_23_47_erl9kq.png" alt="" loading="lazy" data-lightbox></div>
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723147/ChatGPT_Image_24_mai_2026_23_38_37_kutswl.png" alt="" loading="lazy" data-lightbox></div>
+  </div>
+
+  <!-- Citation -->
+  <div class="univers-interlude">
+    <div class="univers-interlude-inner">
+      <blockquote class="reveal">"Un vêtement est une <em>déclaration</em>.<br>SANCHO est une <em>direction</em>."</blockquote>
+    </div>
+  </div>
+
+  <!-- Rangée C : 3 colonnes -->
+  <div class="univers-row-c">
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723148/ChatGPT_Image_24_mai_2026_23_44_20_kzepn1.png" alt="" loading="lazy" data-lightbox></div>
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723149/ChatGPT_Image_25_mai_2026_00_01_11_ouzpoe.png" alt="" loading="lazy" data-lightbox></div>
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723149/ChatGPT_Image_25_mai_2026_00_00_08_awetv0.png" alt="" loading="lazy" data-lightbox></div>
+  </div>
+
+  <!-- Rangée D : 2 colonnes -->
+  <div class="univers-row-d">
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723338/Calque_1_gb0em3.jpg" alt="" loading="lazy" data-lightbox></div>
+    <div class="univers-cell"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723147/ChatGPT_Image_24_mai_2026_23_50_22_pve9b9.png" alt="" loading="lazy" data-lightbox></div>
+  </div>
+
+  <!-- Plein écran final -->
+  <div class="univers-row-e">
+    <div class="univers-cell hero-shot"><img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779723149/GARS_AU_PHONE_gy6jmj.jpg" alt="" loading="lazy" data-lightbox></div>
+  </div>
+</section>
+
+<div class="hr-line"></div>
+
+<!-- FINAL — sans bouton téléchargement -->
+<section id="final">
+  <div class="final-bg"><span class="final-bg-word">SANCHO</span></div>
+  <div class="final-content">
+    <img src="https://res.cloudinary.com/djdkpihuz/image/upload/v1779722827/logo_sancho_V1_BLANC_zuagej.png" alt="SANCHO" class="reveal">
+    <h2 class="final-title reveal reveal-delay-1">SANCHO</h2>
+    <p class="final-sub reveal reveal-delay-2">Collection Originale &mdash; Est. 2026</p>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">SANCHO</span>
+  <span class="footer-info">Visual Direction — Est. 2026 — MDG Creative Studio</span>
+  <span class="footer-info">Direction Artistique · Kaolack, Sénégal</span>
+</footer>
+
+<script>
+/* ---- CURSOR ---- */
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+});
+(function tick(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.textile-item,.exploration-card,.univers-cell').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ ring.style.transform='translate(-50%,-50%) scale(1.6)'; ring.style.borderColor='rgba(242,242,242,0.65)'; });
+  el.addEventListener('mouseleave',()=>{ ring.style.transform='translate(-50%,-50%) scale(1)'; ring.style.borderColor='rgba(242,242,242,0.35)'; });
+});
+
+/* ---- REVEAL ---- */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ---- LIGHTBOX ---- */
+const lb       = document.getElementById('lightbox');
+const lbImg    = document.getElementById('lb-img');
+const lbClose  = document.getElementById('lb-close');
+const lbPrev   = document.getElementById('lb-prev');
+const lbNext   = document.getElementById('lb-next');
+const lbCount  = document.getElementById('lb-counter');
+
+const lbImages = Array.from(document.querySelectorAll('[data-lightbox]'));
+let lbCurrent  = 0;
+
+function openLightbox(idx){
+  lbCurrent = idx;
+  lbImg.src = lbImages[idx].src;
+  lbImg.alt = lbImages[idx].alt || '';
+  lbCount.textContent = (idx+1) + ' / ' + lbImages.length;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(()=>{ lbImg.src=''; },400);
+}
+function lbGo(dir){
+  lbCurrent = (lbCurrent + dir + lbImages.length) % lbImages.length;
+  lbImg.style.opacity='0';
+  setTimeout(()=>{
+    lbImg.src = lbImages[lbCurrent].src;
+    lbImg.alt = lbImages[lbCurrent].alt||'';
+    lbCount.textContent = (lbCurrent+1) + ' / ' + lbImages.length;
+    lbImg.style.opacity='1';
+  },150);
+}
+lbImg.style.transition='opacity 0.15s';
+
+lbImages.forEach((img,i)=>{
+  img.style.cursor='pointer';
+  img.addEventListener('click',()=>openLightbox(i));
+});
+lbClose.addEventListener('click', closeLightbox);
+lbPrev.addEventListener('click', ()=>lbGo(-1));
+lbNext.addEventListener('click', ()=>lbGo(1));
+lb.addEventListener('click', e=>{ if(e.target===lb) closeLightbox(); });
+document.addEventListener('keydown', e=>{
+  if(!lb.classList.contains('open')) return;
+  if(e.key==='Escape') closeLightbox();
+  if(e.key==='ArrowLeft') lbGo(-1);
+  if(e.key==='ArrowRight') lbGo(1);
+});
+</script>
+</body>
+</html>

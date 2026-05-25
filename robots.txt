@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sancho-visual-direction.vercel.app/sitemap.xml
