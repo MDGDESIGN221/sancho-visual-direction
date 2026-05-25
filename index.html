@@ -993,6 +993,11 @@ footer {
 </footer>
 
 <script>
+/* ---- SCROLL TOP ON LOAD ---- */
+window.addEventListener('beforeunload', () => { window.scrollTo(0, 0); });
+history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 /* ---- CURSOR ---- */
 const cursor = document.getElementById('cursor');
 const ring   = document.getElementById('cursor-ring');
