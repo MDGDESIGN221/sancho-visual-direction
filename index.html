@@ -6,11 +6,30 @@
 <title>SANCHO — Lot 02 · Proposition d'identité graphique</title>
 <meta name="description" content="SANCHO — Lot 02. Brand guidelines. Trois directions typographiques : Paraphe, Mirage, Blason. Collection originale, Est. 2026.">
 <script>document.documentElement.classList.add('js');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=cabinet-grotesk@300,400,500,700,800&display=swap">
 <style>
+/* =========================================================
+   POLICES — hébergées localement dans web/fonts/.
+   Les URL du CDN Fontshare sont en protocole relatif (//cdn…),
+   ce qui échoue dès que la page est ouverte en file:// : les
+   titres retombaient alors sur Arial, à l'écran comme au PDF.
+   ========================================================= */
+@font-face{font-family:'Clash Display';src:url('web/fonts/clash-display-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Clash Display';src:url('web/fonts/clash-display-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Clash Display';src:url('web/fonts/clash-display-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap;}
+@font-face{font-family:'Clash Display';src:url('web/fonts/clash-display-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+
+@font-face{font-family:'Cabinet Grotesk';src:url('web/fonts/cabinet-grotesk-300.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cabinet Grotesk';src:url('web/fonts/cabinet-grotesk-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cabinet Grotesk';src:url('web/fonts/cabinet-grotesk-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cabinet Grotesk';src:url('web/fonts/cabinet-grotesk-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cabinet Grotesk';src:url('web/fonts/cabinet-grotesk-800.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap;}
+
+@font-face{font-family:'Cormorant Garamond';src:url('web/fonts/cormorant-garamond-300.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('web/fonts/cormorant-garamond-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('web/fonts/cormorant-garamond-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('web/fonts/cormorant-garamond-300-italic.woff2') format('woff2');font-weight:300;font-style:italic;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('web/fonts/cormorant-garamond-400-italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap;}
+
 /* =========================================================
    TOKENS
    ========================================================= */
@@ -25,9 +44,9 @@
   --silver:#AEB4BA;
   --grey:#7A7A7A;
 
-  --font-display:'Clash Display','Barlow Condensed',sans-serif;
-  --font-serif:'Cormorant Garamond',serif;
-  --font-ui:'Cabinet Grotesk','Barlow',sans-serif;
+  --font-display:'Clash Display','Arial Narrow',sans-serif;
+  --font-serif:'Cormorant Garamond',Georgia,serif;
+  --font-ui:'Cabinet Grotesk',Helvetica,Arial,sans-serif;
 
   --ease:cubic-bezier(0.16,1,0.3,1);
   --ease-soft:cubic-bezier(0.33,1,0.68,1);
@@ -704,43 +723,126 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
    rendu visible : sinon la sortie serait vide.
    ========================================================= */
 @media print{
-  @page{size:297mm 210mm;margin:0;}
+  /* A4 paysage. Chaque page du dossier occupe exactement une page :
+     hauteur fixe + break-after, donc ni page blanche ni coupure. */
+  @page{size:A4 landscape;margin:0;}
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
-  html,body{background:#fff;overflow:visible!important;}
+  html,body{background:#fff;overflow:visible!important;width:297mm;}
   body::after{display:none!important;}
-
   #intro,nav,.progress,.index-ov,.lb,.plate-zoom,.toc-dots{display:none!important;}
 
-  /* Neutralise tous les états d'animation */
-  html.js .reveal,
-  html.js .stagger>*,
-  html.js .rise-line>span{opacity:1!important;transform:none!important;}
-  html.js .plate,
-  html.js .frame-in{clip-path:none!important;}
-  html.js .plate img,
-  html.js .stage-art img{opacity:1!important;transform:none!important;}
+  /* Neutralise tout état d'animation ou de survol */
+  html.js .reveal,html.js .stagger>*,html.js .rise-line>span{opacity:1!important;transform:none!important;}
+  html.js .plate,html.js .frame-in{clip-path:none!important;}
+  html.js .plate img,html.js .stage-art img{opacity:1!important;transform:none!important;}
   html.js .chap-num{opacity:0.4!important;transform:none!important;}
   .eyebrow::before{transform:scaleX(1)!important;}
+  .cmp:hover,.tone div:hover{background:inherit;color:inherit;}
 
-  /* Une page du dossier = une page du PDF */
   .spread{
-    min-height:auto;height:auto;
-    padding:14mm 14mm 10mm;
-    break-after:page;page-break-after:always;
+    width:297mm;height:210mm;min-height:0;
+    padding:9mm 12mm 6.5mm;
+    break-after:page;page-break-after:always;break-inside:avoid;
+    overflow:hidden;
+    display:flex;flex-direction:column;
   }
   .spread:last-of-type{break-after:auto;page-break-after:auto;}
-  .sp-body{padding:8mm 0;}
+  .sp-body{flex:1;padding:2mm 0;min-height:0;justify-content:center;}
+  .sp-head,.sp-foot{flex:0 0 auto;}
+  .sp-head{padding-bottom:2.5mm;}
+  .sp-foot{padding-top:2.5mm;}
+  /* Les marges en vw des blocs d'en-tête sont calées pour l'écran :
+     on les ramène à une valeur typographique. */
+  .sp-body .cols-2{margin-bottom:4mm!important;}
+  .sp-body>div[style*="margin-bottom"]{margin-bottom:4mm!important;}
 
-  /* Les légendes produit ne dépendent plus du survol */
-  .plate-info{position:static;transform:none!important;background:#0A0A0A;padding:8px 10px 9px;}
+  /* Échelle typographique calée sur la page, plus sur l'écran */
+  .h1{font-size:32pt;line-height:0.92;}
+  .h2{font-size:21pt;line-height:0.96;}
+  .h3{font-size:13pt;}
+  .body{font-size:8pt;line-height:1.65;}
+  .body.lead{font-size:10pt;line-height:1.5;}
+  .body+.body{margin-top:2mm;}
+  .eyebrow{font-size:5.4pt;letter-spacing:0.3em;}
+  .sp-head,.sp-foot small{font-size:5.2pt;}
+  .pg{font-size:14pt;}
+  .spec li{font-size:8pt;padding:2mm 0;}
+  .spec li b{font-size:5.2pt;}
+  .intention p{font-size:12pt;}
+  .cover-title{font-size:50pt;line-height:0.88;}
+  .cover-lot{font-size:5.6pt;padding:2mm 3mm;}
+  .cover-meta{padding-top:4mm;gap:4mm;}
+  .cover-meta p{font-size:8pt;}
+  .cover-meta span{font-size:5pt;}
+  .chap-num{font-size:70pt;}
+  .chap-code{font-size:44pt;}
+  .chap-kind{font-size:13pt;margin-top:2mm;}
+  .chap-tags{font-size:5.4pt;line-height:2;}
+  .toc a{padding:1.7mm 0;}
+  .toc i{font-size:12pt;}
+  .toc b,.toc u{font-size:5.4pt;}
+  .logo-read{margin-top:4mm;padding-top:3mm;}
+  .logo-read h4{font-size:11pt;}
+  .logo-read h4 small{font-size:5.2pt;margin-bottom:2mm;}
+  .stage-art{padding:5mm;min-height:0;}
+  .stage-art img{max-height:32mm;max-width:100%;}
+  .stage-bar,.stage-foot span{font-size:5pt;}
+  .stage-foot p{font-size:7.5pt;}
+  .stage-foot div{padding:2.5mm 3mm;}
+  .vcell{min-height:0;padding:5mm;gap:4mm;}
+  .vcell img{max-height:20mm;}
+  .vcell span{font-size:5pt;}
+  .rule-col li{font-size:7.6pt;padding:1.8mm 0 1.8mm 5mm;}
+  .rule-col h4{font-size:5.4pt;padding-bottom:2mm;}
+  .sw-chip{height:13mm;}
+  .sw-meta{padding:2.5mm;gap:0.6mm;}
+  .sw-meta b{font-size:8.5pt;}.sw-meta code{font-size:5.4pt;}.sw-meta em{font-size:7pt;margin-top:0;}
+  .acc{padding:1.5mm 2.5mm;gap:2.5mm;}.acc i{width:5.5mm;height:5.5mm;}
+  .acc div b{font-size:5.4pt;margin-bottom:0.4mm;}.acc div span{font-size:7pt;}
+  /* La largeur A4 (1123 px) déclenche les règles écran « ≤1150 px »
+     qui passent en 2 colonnes : on rétablit explicitement les grilles. */
+  .demo-grid{grid-template-columns:repeat(4,1fr)!important;}
+  .bg-grid{grid-template-columns:repeat(4,1fr)!important;}
+  .cover-meta{grid-template-columns:repeat(4,1fr)!important;}
+
+  .demo{min-height:0;padding:3mm 2mm 2mm;gap:2mm;}
+  .demo-art{height:14mm;}
+  .demo-label{font-size:4.6pt;}
+  .bg-cell{min-height:0;padding:3.5mm;gap:2.5mm;}
+  .bg-cell img{max-width:28mm;}
+  .bg-cell span{font-size:4.6pt;}
+  .rules{gap:6mm;}
+  .cmp{padding:2.6mm;gap:1.4mm;}
+  .cmp-logo{height:6mm;}
+  .cmp-name{font-size:11pt;}.cmp-kind{font-size:6.8pt;margin-top:0;}
+  .cmp-list{gap:1mm;}
+  .cmp-list li{font-size:6.3pt;line-height:1.38;padding-left:2.6mm;}
+  .cmp-num,.cmp-foot{font-size:4.8pt;}
+  .cmp-foot{padding-top:2mm;}
+  .tone div{padding:7mm 2mm;font-size:11pt;}
+  .protect-stage{padding:6mm;}
+  .protect-box{padding:8mm;}
+  .protect-box img{max-width:52mm;}
+  .size-row{padding:2.5mm 3mm;}
+  .size-row b{font-size:9pt;}.size-row span{font-size:5.2pt;}
+  .concl-marks img{height:9mm;}
+  .concl-inner{gap:4mm;}
+  .chap-ghost{opacity:0.45;}
+
+  /* Planches produit : légendes visibles, grille calée sur le nombre de pièces */
   .plate{aspect-ratio:auto;display:flex;flex-direction:column;break-inside:avoid;}
-  .plate img{aspect-ratio:1/1;height:auto;}
-  .plate-info b{font-size:9pt;}
-  .plate-info i{font-size:6pt;}
-
-  .cmp:hover,.tone div:hover{background:inherit;color:inherit;}
-  .demo,.vcell,.bg-cell,.sw,.acc,.cmp,.size-row{break-inside:avoid;}
-  .chap-ghost{opacity:0.5;}
+  .plate img{aspect-ratio:1/1;height:auto;padding:1.5mm;}
+  .plate-info{position:static;transform:none!important;background:#0A0A0A;padding:2mm 2.5mm 2.2mm;margin-top:auto;}
+  .plate-info b{font-size:7pt;margin-bottom:0;}
+  .plate-info i{font-size:4.8pt;letter-spacing:0.14em;}
+  .grid12{gap:2.5mm;}
+  .grid12>div{grid-column:auto!important;display:flex;}
+  .grid12>div>.plate{flex:1;}
+  .g12{grid-template-columns:repeat(6,1fr);}
+  .g5 {grid-template-columns:repeat(5,1fr);}
+  .g4 {grid-template-columns:repeat(4,1fr);}
+  .g2 {grid-template-columns:repeat(2,1fr);}
+  .g2 .plate img{max-height:74mm;}
 }
 </style>
 </head>
@@ -967,7 +1069,7 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
       </div>
       <p class="body reveal d2" style="max-width:380px;">La signature se décline du marquage discret à l'impression pleine largeur, sur maille, jersey et molleton.</p>
     </div>
-    <div class="grid12">
+    <div class="grid12 g12">
       <div class="c8"><div class="plate" data-lb data-src="web/paraphe/snc-101-look-complet.jpg"><span class="plate-zoom">↗</span><img loading="lazy" decoding="async" src="web/paraphe/snc-101-look-complet.jpg" alt="Look complet Paraphe"><div class="plate-info"><b>Look Complet</b><i>SNC-101 — Tee · Casquette · Gants</i></div></div></div>
       <div class="c4"><div class="plate" data-lb data-src="web/paraphe/snc-102-hoodie-signature.jpg"><span class="plate-zoom">↗</span><img loading="lazy" decoding="async" src="web/paraphe/snc-102-hoodie-signature.jpg" alt="Hoodie signature"><div class="plate-info"><b>Hoodie Signature</b><i>SNC-102 — Noir / Crème</i></div></div></div>
       <div class="c4"><div class="plate" data-lb data-src="web/paraphe/snc-103-hoodie-compact.jpg"><span class="plate-zoom">↗</span><img loading="lazy" decoding="async" src="web/paraphe/snc-103-hoodie-compact.jpg" alt="Hoodie compact"><div class="plate-info"><b>Hoodie Compact</b><i>SNC-103 — Noir / Crème</i></div></div></div>
@@ -996,7 +1098,7 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
       </div>
       <p class="body reveal d2" style="max-width:400px;">En broderie relief comme en impression, la signature garde sa lisibilité sur la faible surface d'une visière. Le format réduit se place en rappel sur le côté.</p>
     </div>
-    <div class="grid12">
+    <div class="grid12 g2">
       <div class="c6"><div class="plate" data-lb data-src="web/paraphe/snc-112-cap-brodee.jpg"><span class="plate-zoom">↗</span><img loading="lazy" decoding="async" src="web/paraphe/snc-112-cap-brodee.jpg" alt="Casquette brodée délavée"><div class="plate-info"><b>Cap Brodée — Destroy</b><i>SNC-112 — Brun délavé / Crème</i></div></div></div>
       <div class="c6"><div class="plate" data-lb data-src="web/paraphe/snc-113-cap-imprimee.jpg"><span class="plate-zoom">↗</span><img loading="lazy" decoding="async" src="web/paraphe/snc-113-cap-imprimee.jpg" alt="Planche casquettes noires"><div class="plate-info"><b>Cap Imprimée — Planche</b><i>SNC-113 — Noir délavé / Blanc</i></div></div></div>
     </div>
@@ -1106,7 +1208,7 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
       </div>
       <p class="body reveal d2" style="max-width:380px;">Le logotype supporte les grands formats dos comme les marquages poitrine réduits, sans perte de lisibilité.</p>
     </div>
-    <div class="grid12">
+    <div class="grid12 g5">
       <div class="c7"><div class="plate" data-lb data-src="web/mirage/snc-201-polo-football.jpg"><span class="plate-zoom">↗</span><img loading="lazy" decoding="async" src="web/mirage/snc-201-polo-football.jpg" alt="Polo football"><div class="plate-info"><b>Polo Football</b><i>SNC-201 — Bordeaux / Crème</i></div></div></div>
       <div class="c5"><div class="plate" data-lb data-src="web/mirage/snc-202-tee-porte.jpg"><span class="plate-zoom">↗</span><img loading="lazy" decoding="async" src="web/mirage/snc-202-tee-porte.jpg" alt="Tee oversize porté"><div class="plate-info"><b>Tee Oversize — Porté</b><i>SNC-202 — Noir / Blanc</i></div></div></div>
       <div class="c4"><div class="plate" data-lb data-src="web/mirage/snc-203-tee-recto-verso.jpg"><span class="plate-zoom">↗</span><img loading="lazy" decoding="async" src="web/mirage/snc-203-tee-recto-verso.jpg" alt="Tee recto verso"><div class="plate-info"><b>Tee Recto / Verso</b><i>SNC-203 — Sable délavé</i></div></div></div>
@@ -1219,7 +1321,7 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
       </div>
       <p class="body reveal d2" style="max-width:380px;">L'emblème s'inscrit aussi bien à plat qu'enfermé dans un cartouche circulaire ou ovale, qui devient un second niveau de signature.</p>
     </div>
-    <div class="grid12">
+    <div class="grid12 g4">
       <div class="c12"><div class="plate" data-lb data-src="web/blason/snc-301-hoodie-duo.jpg"><span class="plate-zoom">↗</span><img loading="lazy" decoding="async" src="web/blason/snc-301-hoodie-duo.jpg" alt="Hoodies recto verso"><div class="plate-info"><b>Hoodie — Recto / Verso</b><i>SNC-301 — Noir / Argent</i></div></div></div>
       <div class="c4"><div class="plate" data-lb data-src="web/blason/snc-302-hoodie-porte.jpg"><span class="plate-zoom">↗</span><img loading="lazy" decoding="async" src="web/blason/snc-302-hoodie-porte.jpg" alt="Hoodie porté"><div class="plate-info"><b>Hoodie — Porté</b><i>SNC-302 — Noir délavé / Argent</i></div></div></div>
       <div class="c4"><div class="plate" data-lb data-src="web/blason/snc-303-hoodie-delave.jpg"><span class="plate-zoom">↗</span><img loading="lazy" decoding="async" src="web/blason/snc-303-hoodie-delave.jpg" alt="Hoodie rouge délavé"><div class="plate-info"><b>Hoodie Délavé</b><i>SNC-303 — Rouge profond / Crème</i></div></div></div>
