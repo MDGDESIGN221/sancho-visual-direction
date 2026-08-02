@@ -67,55 +67,53 @@ body::after{
    OUVERTURE — les trois logotypes s'enchaînent, puis le
    rideau se lève sur la couverture. Aucune barre de charge.
    ========================================================= */
+/* Les trois logotypes se posent l'un SOUS l'autre — jamais superposés —
+   puis le voile s'efface. Sortie en opacité : c'est la transition la plus
+   fiablement composée sur mobile (un translate sur élément fixe peut
+   n'être repeint qu'au premier défilement). */
 #intro{display:none;}
 html.js #intro{
   position:fixed;inset:0;z-index:9500;background:var(--red);
-  display:flex;align-items:center;justify-content:center;
-  transform:translateY(0);
-  transition:transform 1.1s cubic-bezier(0.76,0,0.24,1);
-  overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(1.6rem,5vh,3rem);
+  padding:2rem var(--gutter);
+  opacity:1;
+  transition:opacity 0.7s ease-out;
+  overflow:hidden;will-change:opacity;
 }
 #intro::before{
   content:'';position:absolute;inset:0;
   background:repeating-linear-gradient(115deg,rgba(0,0,0,0.13) 0 2px,transparent 2px 68px);
   pointer-events:none;
 }
-#intro.done{transform:translateY(-101%);}
+#intro.done{opacity:0;pointer-events:none;}
+
 .intro-stack{
-  position:relative;z-index:2;width:min(62vw,540px);height:min(30vh,220px);
-  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;
+  gap:clamp(1.1rem,3.4vh,2.2rem);
+  width:min(72vw,420px);
 }
-.intro-stack img{
-  position:absolute;left:50%;top:50%;
-  width:100%;max-height:100%;object-fit:contain;
-  transform:translate(-50%,-50%) scale(0.94);
-  opacity:0;
+.intro-row{width:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.intro-row img{
+  height:clamp(44px,7.6vh,84px);width:auto;max-width:100%;
+  transform:translateY(112%);opacity:0;
 }
-html.js .intro-stack img{animation:introFlash 0.78s var(--ease) both;}
-.intro-stack img:nth-child(1){animation-delay:0.25s;}
-.intro-stack img:nth-child(2){animation-delay:0.85s;}
-.intro-stack img:nth-child(3){animation-delay:1.45s;}
-@keyframes introFlash{
-  0%   {opacity:0;transform:translate(-50%,-50%) scale(0.94);}
-  26%  {opacity:1;transform:translate(-50%,-50%) scale(1);}
-  74%  {opacity:1;transform:translate(-50%,-50%) scale(1.01);}
-  100% {opacity:0;transform:translate(-50%,-50%) scale(1.05);}
-}
-/* Le dernier logotype reste en place avant le lever de rideau */
-.intro-stack img:nth-child(3){animation-name:introHold;animation-duration:1s;}
-@keyframes introHold{
-  0%   {opacity:0;transform:translate(-50%,-50%) scale(0.94);}
-  22%  {opacity:1;transform:translate(-50%,-50%) scale(1);}
-  100% {opacity:1;transform:translate(-50%,-50%) scale(1);}
+html.js .intro-row img{animation:introRise 0.85s var(--ease) both;}
+.intro-row:nth-child(1) img{animation-delay:0.18s;}
+.intro-row:nth-child(2) img{animation-delay:0.36s;}
+.intro-row:nth-child(3) img{animation-delay:0.54s;}
+@keyframes introRise{
+  from{transform:translateY(112%);opacity:0;}
+  to  {transform:translateY(0);opacity:1;}
 }
 .intro-cap{
-  position:absolute;left:0;right:0;bottom:clamp(2rem,6vh,4rem);z-index:2;
-  text-align:center;
-  font-family:var(--font-ui);font-weight:500;font-size:0.58rem;
-  letter-spacing:0.4em;text-transform:uppercase;color:rgba(244,242,238,0.7);
-  opacity:0;animation:introCap 0.9s var(--ease) 1.6s both;
+  position:relative;z-index:2;text-align:center;
+  font-family:var(--font-ui);font-weight:500;font-size:0.55rem;
+  letter-spacing:0.36em;text-transform:uppercase;color:rgba(244,242,238,0.72);
+  opacity:0;animation:introCap 0.8s var(--ease) 1.05s both;
 }
-@keyframes introCap{from{opacity:0;transform:translateY(10px);}to{opacity:0.7;transform:none;}}
+@keyframes introCap{from{opacity:0;transform:translateY(8px);}to{opacity:0.72;transform:none;}}
 
 /* =========================================================
    CURSEUR — natif, avec les affordances usuelles
@@ -391,7 +389,9 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
 
 .versions{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);width:100%;}
 .vcell{padding:clamp(1.8rem,3.5vw,3rem);display:flex;flex-direction:column;gap:2rem;min-height:clamp(200px,26vw,320px);}
-.vcell img{width:100%;max-width:300px;margin:auto;}
+/* Borné en hauteur, pas en largeur : les trois logotypes gardent la même
+   présence quel que soit leur rapport, et aucun ne touche les parois. */
+.vcell img{width:auto;height:auto;max-width:100%;max-height:clamp(52px,8.5vw,126px);margin:auto;}
 .vcell span{font-family:var(--font-ui);font-weight:500;font-size:0.52rem;letter-spacing:0.26em;text-transform:uppercase;}
 .v-dark{background:var(--black);}.v-dark span{color:rgba(244,242,238,0.5);}
 .v-light{background:#FFFFFF;}.v-light span{color:rgba(10,10,10,0.5);}
@@ -645,8 +645,11 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
   .tone{grid-template-columns:repeat(2,1fr);}
   .tone div{padding:1.8rem 0.8rem;font-size:1rem;}
 
-  .stage-art{padding:2.2rem 1.2rem;min-height:150px;}
-  .vcell{min-height:170px;padding:1.5rem;gap:1.3rem;}
+  /* Le logotype respire dans son cadre, sans jamais en toucher les parois */
+  .stage-art{padding:2rem 1.1rem;min-height:120px;}
+  .stage-art img{max-width:100%;max-height:22vh;}
+  .vcell{min-height:160px;padding:1.5rem;gap:1.3rem;}
+  .vcell img{max-height:clamp(50px,17vw,76px);}
   .protect-stage{padding:1.6rem;}
   .protect-box{padding:1.7rem;}
   .sw-chip{height:110px;}
@@ -666,8 +669,9 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
   .lb-count{bottom:1.35rem;}
   .lb-close{top:0.9rem;right:1rem;font-size:0.52rem;}
 
-  .intro-stack{width:74vw;height:22vh;}
-  .intro-cap{font-size:0.5rem;letter-spacing:0.3em;}
+  .intro-stack{width:min(74vw,300px);gap:1.7rem;}
+  .intro-row img{height:clamp(46px,16vw,68px);}
+  .intro-cap{font-size:0.47rem;letter-spacing:0.28em;}
 }
 
 @media (max-width:340px){
@@ -690,8 +694,53 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
   html.js .plate,html.js .frame-in{clip-path:none;}
   html.js .plate img,html.js .stage-art img{transform:none;opacity:1;}
   html.js .chap-num{opacity:0.4;transform:none;}
-  html.js .intro-stack img:nth-child(3){opacity:1;}
-  .intro-cap{opacity:0.7;}
+  html.js .intro-row img{opacity:1;transform:none;}
+  .intro-cap{opacity:0.72;}
+}
+
+/* =========================================================
+   IMPRESSION / EXPORT PDF
+   Tout ce qui dépend d'une animation ou d'un survol doit être
+   rendu visible : sinon la sortie serait vide.
+   ========================================================= */
+@media print{
+  @page{size:297mm 210mm;margin:0;}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  html,body{background:#fff;overflow:visible!important;}
+  body::after{display:none!important;}
+
+  #intro,nav,.progress,.index-ov,.lb,.plate-zoom,.toc-dots{display:none!important;}
+
+  /* Neutralise tous les états d'animation */
+  html.js .reveal,
+  html.js .stagger>*,
+  html.js .rise-line>span{opacity:1!important;transform:none!important;}
+  html.js .plate,
+  html.js .frame-in{clip-path:none!important;}
+  html.js .plate img,
+  html.js .stage-art img{opacity:1!important;transform:none!important;}
+  html.js .chap-num{opacity:0.4!important;transform:none!important;}
+  .eyebrow::before{transform:scaleX(1)!important;}
+
+  /* Une page du dossier = une page du PDF */
+  .spread{
+    min-height:auto;height:auto;
+    padding:14mm 14mm 10mm;
+    break-after:page;page-break-after:always;
+  }
+  .spread:last-of-type{break-after:auto;page-break-after:auto;}
+  .sp-body{padding:8mm 0;}
+
+  /* Les légendes produit ne dépendent plus du survol */
+  .plate-info{position:static;transform:none!important;background:#0A0A0A;padding:8px 10px 9px;}
+  .plate{aspect-ratio:auto;display:flex;flex-direction:column;break-inside:avoid;}
+  .plate img{aspect-ratio:1/1;height:auto;}
+  .plate-info b{font-size:9pt;}
+  .plate-info i{font-size:6pt;}
+
+  .cmp:hover,.tone div:hover{background:inherit;color:inherit;}
+  .demo,.vcell,.bg-cell,.sw,.acc,.cmp,.size-row{break-inside:avoid;}
+  .chap-ghost{opacity:0.5;}
 }
 </style>
 </head>
@@ -699,9 +748,9 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
 
 <div id="intro">
   <div class="intro-stack">
-    <img src="web/logos/paraphe-blanc.png" alt="">
-    <img src="web/logos/mirage-blanc.png" alt="">
-    <img src="web/logos/blason-blanc.png" alt="">
+    <div class="intro-row"><img src="web/logos/paraphe-blanc.png" alt=""></div>
+    <div class="intro-row"><img src="web/logos/mirage-blanc.png" alt=""></div>
+    <div class="intro-row"><img src="web/logos/blason-blanc.png" alt=""></div>
   </div>
   <div class="intro-cap">Lot 02 — Identité graphique</div>
 </div>
@@ -872,7 +921,7 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
   <div class="sp-body">
     <div class="stage frame-in">
       <div class="stage-bar"><span>Logo 01 — Paraphe</span><span>Version principale</span></div>
-      <div class="stage-art"><img src="web/logos/paraphe-blanc.png" alt="Logotype SANCHO — Paraphe" style="max-width:600px;"></div>
+      <div class="stage-art"><img src="web/logos/paraphe-blanc.png" alt="Logotype SANCHO — Paraphe"></div>
       <div class="stage-foot">
         <div><span>Nom de code</span><p>PARAPHE</p></div>
         <div><span>Nature</span><p>Signature calligraphique</p></div>
@@ -898,9 +947,9 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
   <div class="sp-body">
     <p class="eyebrow reveal" style="margin-bottom:2rem;">Versions autorisées</p>
     <div class="versions frame-in">
-      <div class="vcell v-dark"><span>Fond sombre — logo blanc</span><img src="web/logos/paraphe-blanc.png" alt="Paraphe blanc" style="max-width:250px;"></div>
-      <div class="vcell v-light"><span>Fond clair — logo noir</span><img src="web/logos/paraphe-noir.png" alt="Paraphe noir" style="max-width:250px;"></div>
-      <div class="vcell v-red"><span>Aplat couleur — logo blanc</span><img src="web/logos/paraphe-blanc.png" alt="Paraphe blanc sur rouge" style="max-width:250px;"></div>
+      <div class="vcell v-dark"><span>Fond sombre — logo blanc</span><img src="web/logos/paraphe-blanc.png" alt="Paraphe blanc"></div>
+      <div class="vcell v-light"><span>Fond clair — logo noir</span><img src="web/logos/paraphe-noir.png" alt="Paraphe noir"></div>
+      <div class="vcell v-red"><span>Aplat couleur — logo blanc</span><img src="web/logos/paraphe-blanc.png" alt="Paraphe blanc sur rouge"></div>
     </div>
     <p class="body reveal d2" style="margin-top:2rem;max-width:640px;">La signature fonctionne aussi bien en marquage large qu'en format réduit sur étiquette, col ou accessoire.</p>
   </div>
@@ -1436,7 +1485,7 @@ html.js .stage.in .stage-art img{opacity:1;transform:none;}
       </div>
       <p class="eyebrow plain reveal d1" style="justify-content:center;">09 — Conclusion</p>
       <h2 class="h1" data-split>Une base<br><em class="ser">solide</em></h2>
-      <p class="body lead reveal d3" style="max-width:600px;">Ces propositions constituent une base solide pour le développement de l'identité visuelle de SANCHO.</p>
+      <p class="body lead reveal d3">Ces propositions constituent une base solide pour le développement de l'identité visuelle de SANCHO.</p>
       <p class="body reveal d4" style="max-width:540px;color:rgba(244,242,238,0.72);">Le choix final orientera l'ensemble de la communication et du positionnement de la marque.</p>
       <p class="eyebrow plain reveal d5" style="justify-content:center;margin-top:1.2rem;">Collection originale — Est. 2026</p>
     </div>
@@ -1478,15 +1527,30 @@ window.scrollTo(0,0);
 (function(){
   const intro=document.getElementById('intro');
   if(!intro) return;
+  let closed=false;
   document.body.style.overflow='hidden';
-  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  const wait=reduce?300:2650;
-  setTimeout(()=>{
+
+  function close(){
+    if(closed) return;
+    closed=true;
     intro.classList.add('done');
     document.body.style.overflow='';
     document.querySelectorAll('#cover .reveal,#cover .rise-line').forEach(el=>el.classList.add('in'));
-    setTimeout(()=>intro.remove(),1200);
-  },wait);
+    /* Retrait du DOM : même si la transition n'est pas peinte, le voile
+       disparaît. Deux filets, l'un ne dépendant pas de l'autre. */
+    setTimeout(()=>{ if(intro.parentNode) intro.remove(); },800);
+    setTimeout(()=>{ if(intro.parentNode) intro.remove(); },2000);
+  }
+
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  setTimeout(close, reduce?250:2050);
+
+  /* Le voile ne doit jamais retenir le visiteur : tout geste l'écarte. */
+  ['click','touchstart','wheel','keydown'].forEach(ev=>
+    addEventListener(ev,close,{once:true,passive:true})
+  );
+  /* Dernier recours si une image tarde ou qu'un timer est gelé. */
+  setTimeout(close,5000);
 })();
 
 /* =========================================================
