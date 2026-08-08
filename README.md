@@ -1,12 +1,14 @@
 # SANCHO — Visual Direction
 
-Site one-page ultra premium présentant la direction artistique de la marque SANCHO.
+Dossier de direction artistique de la marque SANCHO — Lot 02.
+
+Cinq directions typographiques : Paraphe, Foudre, Fanion, Mirage, Blason. 44 pages, export PDF A4 via l'impression du navigateur.
 
 ## Stack
 
 - HTML5 / CSS3 / Vanilla JS
-- Google Fonts (Bebas Neue, DM Serif Display, Syne, Space Mono)
-- Images hébergées sur Cloudinary
+- Polices auto-hébergées (Bodoni Moda, Inter Tight, JetBrains Mono)
+- Images optimisées dans web/ (1400 px)
 - Déployé sur Vercel
 
 ## Structure
