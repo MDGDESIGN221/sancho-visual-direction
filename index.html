@@ -658,7 +658,7 @@ html.js .brief-art.in{clip-path:inset(0 0 0 0);}
   .plate-info{opacity:1!important;transform:none!important;}
 
   .spread{
-    width:auto;height:auto;min-height:100vh;padding:12mm 13mm 9mm;
+    width:auto;height:auto;min-height:100vh;padding:10mm 12mm 8mm;
     break-after:page;page-break-after:always;break-inside:auto;
     overflow:visible;display:flex;flex-direction:column;
   }
@@ -671,16 +671,44 @@ html.js .brief-art.in{clip-path:inset(0 0 0 0);}
      seconde feuille : on les tasse au format carre a l'impression. */
   .plate{aspect-ratio:1/1;}
   .plate.wide{aspect-ratio:3/2;}
-  .grid12 .plate{aspect-ratio:auto;height:68mm;}
-  .grid12 .plate.wide{height:54mm;}
-  .grid12 .plate.square{height:62mm;}
+  .grid12 .plate{aspect-ratio:auto;height:47mm;}
+  .grid12 .plate.wide{height:37mm;}
+  .grid12 .plate.square{height:44mm;}
+  .grid12{gap:2.5mm;}
+  .demo{aspect-ratio:16/10;}
+  .logo-read{margin-top:7mm;gap:8mm;}
+  .h1{font-size:34pt;} .h2{font-size:24pt;} .h3{font-size:17pt;}
+  .brief-title{font-size:20pt;}
+  .body{font-size:9pt;line-height:1.5;} .lead{font-size:11pt;}
+  .spec li{padding:2.6mm 0;font-size:9pt;}
+  .cmp-list{font-size:7.5pt;} .cmp-logo{height:11mm;}
+  .ways{margin-top:5mm;}
+  .protect-box img{width:60mm;}
   .versions .vcell,.demo,.tone div{aspect-ratio:3/2;}
   .stage-art{min-height:40mm;padding:8mm 10mm;}
   .brief-blocks{gap:4mm;}
   .sw-chip{aspect-ratio:16/9;}
   .cover-mark{opacity:0.12;}
+  /* Une A4 fait 794 px CSS : sans cela, l'export bascule sur les
+     grilles telephone et chaque page deborde sur une seconde feuille. */
   .compare{grid-template-columns:repeat(5,1fr);}
-  .grid12{gap:3mm;}
+  .cols-2{grid-template-columns:minmax(0,0.86fr) minmax(0,1.14fr);gap:10mm;}
+  .cols-even{grid-template-columns:repeat(2,minmax(0,1fr));gap:8mm;}
+  .cols-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .brief{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:8mm;}
+  .logo-read{grid-template-columns:minmax(0,0.78fr) minmax(0,1.22fr);}
+  .protect{grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);}
+  .versions{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .vcell{aspect-ratio:4/3;}
+  .demo-grid,.bg-grid,.swatches,.acc-row,.tone{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .rules{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .c4{grid-column:span 4;}.c5{grid-column:span 5;}.c6{grid-column:span 6;}
+  .c7{grid-column:span 7;}.c8{grid-column:span 8;}.c12{grid-column:span 12;}
+  .inside{grid-template-columns:repeat(12,1fr);}
+  .ins-1{grid-column:1/span 4;}.ins-2{grid-column:6/span 4;}.ins-3{grid-column:2/span 4;}
+  .ins-4{grid-column:7/span 4;}.ins-5{grid-column:3/span 4;}
+  .ins-q{grid-column:8/span 5;text-align:right;}
+  .merci-corners{display:block;}
   .brief-art{min-height:110mm;}
 }
 </style>
