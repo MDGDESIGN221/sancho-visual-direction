@@ -316,16 +316,18 @@ body.ctx-light nav{background:rgba(244,241,234,0.78);border-bottom-color:rgba(18
   overflow:hidden;
 }
 .chap-outline{
-  position:absolute;left:-0.04em;top:50%;transform:translateY(-50%);
-  font-family:var(--font-display);font-weight:700;font-size:clamp(6.5rem,16vw,13rem);line-height:0.78;
-  color:transparent;-webkit-text-stroke:1.5px rgba(18,10,11,0.28);letter-spacing:-0.03em;
+  position:absolute;left:-0.24em;top:50%;transform:translateY(-50%);
+  font-family:var(--font-display);font-weight:700;font-size:clamp(5rem,11vw,9rem);line-height:0.78;
+  color:transparent;-webkit-text-stroke:1.2px rgba(18,10,11,0.22);letter-spacing:-0.04em;
   pointer-events:none;z-index:0;
 }
 .chap-panel-lab{
   position:absolute;top:clamp(0.7rem,2vw,1.1rem);right:clamp(0.9rem,2.4vw,1.6rem);z-index:2;
   font-family:var(--font-mono);font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(18,10,11,0.55);
 }
-.chap-panel-in{position:relative;z-index:2;padding-left:clamp(2.6rem,9vw,7rem);}
+/* La reserve a gauche doit toujours depasser la largeur visible du
+   chiffre evide, sinon le nom de code se lit par-dessus. */
+.chap-panel-in{position:relative;z-index:2;padding-left:clamp(5.5rem,14vw,11.5rem);}
 .chap-code{font-family:var(--font-display);font-weight:700;font-size:clamp(2.4rem,8.4vw,5.6rem);line-height:0.88;letter-spacing:-0.03em;}
 .chap-code em{font-style:italic;font-weight:400;}
 .chap-kind{font-family:var(--font-display);font-style:italic;font-size:clamp(1rem,2.2vw,1.55rem);margin-top:0.5rem;color:rgba(18,10,11,0.72);}
