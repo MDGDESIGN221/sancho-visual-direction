@@ -457,9 +457,9 @@ body.ctx-light nav{background:rgba(244,241,234,0.78);border-bottom-color:rgba(18
 .sp-ink .plate,.sp-deep .plate,.sp-flat .plate{background:rgba(0,0,0,0.25);}
 .plate.wide{aspect-ratio:4/3;}
 .plate.square{aspect-ratio:1/1;}
-.grid12 .plate{aspect-ratio:auto;width:100%;height:min(42svh,380px);}
-.grid12 .plate.wide{height:min(33svh,300px);}
-.grid12 .plate.square{height:min(38svh,340px);}
+.grid12 .plate{aspect-ratio:4/5;}
+.grid12 .plate.wide{aspect-ratio:4/3;}
+.grid12 .plate.square{aspect-ratio:1/1;}
 .plate img{width:100%;height:100%;object-fit:cover;transition:transform 0.9s var(--ease);}
 .plate:hover img{transform:scale(1.035);}
 .plate-zoom{position:absolute;top:0.6rem;right:0.6rem;z-index:3;width:26px;height:26px;border-radius:50%;background:rgba(244,241,234,0.9);color:var(--ink);display:grid;place-items:center;font-size:0.68rem;opacity:0;transform:scale(0.7);transition:opacity 0.35s,transform 0.35s var(--ease);}
@@ -592,9 +592,8 @@ body.ctx-light nav{background:rgba(244,241,234,0.78);border-bottom-color:rgba(18
   .body+.body{margin-top:0.85rem;}
   .demo{aspect-ratio:3/2;}
   .tone div{aspect-ratio:3/2;}
-  .grid12 .plate{height:min(36svh,320px);}
-  .grid12 .plate.wide{height:min(28svh,250px);}
-  .grid12 .plate.square{height:min(32svh,290px);}
+  .grid12 .plate{aspect-ratio:1/1;}
+  .grid12 .plate.wide{aspect-ratio:3/2;}
 }
 
 /* =========================================================
@@ -669,11 +668,12 @@ html.js .brief-art.in{clip-path:inset(0 0 0 0);}
   .plate,.stage,.vcell,.demo,.bg-cell,.cmp,.intention,.rule-col,.chap-panel,.ins{break-inside:avoid;page-break-inside:avoid;}
   /* Les planches produit sont la seule cause de debordement sur une
      seconde feuille : on les tasse au format carre a l'impression. */
-  .plate{aspect-ratio:1/1;}
-  .plate.wide{aspect-ratio:3/2;}
-  .grid12 .plate{aspect-ratio:auto;height:47mm;}
-  .grid12 .plate.wide{height:37mm;}
-  .grid12 .plate.square{height:44mm;}
+  /* Carre a l'impression : le bandeau plein cadre rognait les photos
+     portrait, le 4/5 ne tenait pas sur la feuille. Le carre est le
+     compromis — le vetement reste entier, la page ne deborde pas. */
+  .grid12 .plate{aspect-ratio:1/1;}
+  .grid12 .plate.wide{aspect-ratio:3/2;}
+  .grid12 .plate.square{aspect-ratio:1/1;}
   .grid12{gap:2.5mm;}
   .demo{aspect-ratio:16/10;}
   .logo-read{margin-top:7mm;gap:8mm;}
